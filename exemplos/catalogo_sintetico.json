@@ -1,0 +1,59 @@
+{
+ "_aviso": "EXEMPLO SINTÉTICO, inventado para mostrar o formato de entrada do src/montar_dataset.py. Não vem do sistema do experimento. No experimento havia centenas de telas e ~20 perguntas por tela.",
+ "telas": [
+  {
+   "rota": "Acervo/EmprestimoLivro",
+   "ficha": {
+    "nome": "Empréstimo de livro",
+    "botoes": ["Novo empréstimo", "Pesquisar", "Renovar"],
+    "acoes": ["emprestar", "renovar", "devolver"],
+    "campos": ["leitor", "exemplar", "data de devolução"],
+    "capacidades": ["registra a saída de um exemplar", "renova o prazo de um empréstimo em aberto"]
+   },
+   "descricao": "registra a saída de um exemplar para um leitor, com data de devolução",
+   "menu": "Acervo › Empréstimos",
+   "n_casos_qa": 12,
+   "perguntas": [
+    "como registro que um leitor levou um livro?",
+    "como renovo o prazo de um livro que já está com o leitor?",
+    "onde dou baixa na devolução de um exemplar?"
+   ]
+  },
+  {
+   "rota": "Acervo/ReservaLivro",
+   "ficha": {
+    "nome": "Reserva de livro",
+    "botoes": ["Reservar", "Pesquisar", "Cancelar reserva"],
+    "acoes": ["reservar", "cancelar reserva"],
+    "campos": ["leitor", "título", "posição na fila"],
+    "capacidades": ["coloca o leitor na fila de espera de um título", "cancela uma reserva"]
+   },
+   "descricao": "coloca o leitor na fila de espera de um título sem exemplar livre",
+   "menu": "Acervo › Reservas",
+   "n_casos_qa": 7,
+   "perguntas": [
+    "o leitor quer ficar na fila de um título que está todo emprestado, onde faço isso?",
+    "como cancelo a reserva de um leitor?",
+    "onde vejo em que posição da fila o leitor está?"
+   ]
+  },
+  {
+   "rota": "Leitores/CadastroLeitor",
+   "ficha": {
+    "nome": "Cadastro de leitor",
+    "botoes": ["Adicionar", "Pesquisar", "Bloquear"],
+    "acoes": ["cadastrar", "editar", "bloquear"],
+    "campos": ["nome", "documento", "telefone", "situação"],
+    "capacidades": ["cadastra e edita leitores", "bloqueia um leitor com pendência"]
+   },
+   "descricao": "cadastra, edita e bloqueia leitores da biblioteca",
+   "menu": "Leitores › Cadastro",
+   "n_casos_qa": 9,
+   "perguntas": [
+    "quero cadastrar um leitor",
+    "como atualizo o telefone de um leitor?",
+    "onde bloqueio um leitor que está com livro atrasado?"
+   ]
+  }
+ ]
+}

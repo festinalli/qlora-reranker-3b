@@ -1,0 +1,25 @@
+{
+ "_aviso": "EXEMPLOS SINTÉTICOS, inventados para mostrar o formato. No experimento cada caso tinha 40 candidatas; aqui há 3 para caber.",
+ "casos": [
+  {
+   "id": "N001",
+   "grupo": "Acervo",
+   "tipo": "especifica",
+   "fraco": false,
+   "pergunta": "o leitor quer ficar na fila de um título que está todo emprestado, onde faço isso?",
+   "certas": ["Acervo/ReservaLivro"],
+   "candidatas": ["Acervo/EmprestimoLivro", "Acervo/ReservaLivro", "Leitores/CadastroLeitor"],
+   "base": {"busca_sem_llm": 2, "api_1_passo": 1, "api_2_passos": 1}
+  },
+  {
+   "id": "N002",
+   "grupo": "Leitores",
+   "tipo": "vaga",
+   "fraco": false,
+   "pergunta": "quero cadastrar um leitor",
+   "certas": ["Leitores/CadastroLeitor"],
+   "candidatas": ["Leitores/CadastroLeitor", "Acervo/EmprestimoLivro", "Acervo/ReservaLivro"],
+   "base": {"busca_sem_llm": 1, "api_1_passo": 1, "api_2_passos": 1}
+  }
+ ]
+}

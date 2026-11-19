@@ -1,0 +1,29 @@
+# dados e resultados ficam fora do repositório (os do experimento são de um cliente)
+dados/
+dados_v2/
+teste/
+teste_novo/
+resultados/
+saida/
+*.jsonl
+!exemplos/*.jsonl
+*.npy
+
+# pesos de modelo e adapters
+*.safetensors
+*.bin
+*.gguf
+*.pt
+adapter_config.json
+tokenizer.json
+
+# segredos
+.env
+.env.*
+*.key
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/

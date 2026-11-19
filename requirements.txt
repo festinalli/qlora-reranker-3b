@@ -1,0 +1,8 @@
+# Versões que aparecem nos logs do experimento (WSL2/Ubuntu, CUDA 12.8).
+# As versões de trl, datasets e numpy não ficaram registradas nos logs: fixe as que funcionarem com o seu ambiente.
+unsloth==2026.6.9
+transformers==5.5.0
+torch==2.10.0
+trl
+datasets
+numpy

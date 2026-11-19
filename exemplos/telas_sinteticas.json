@@ -1,0 +1,6 @@
+{
+ "_aviso": "EXEMPLOS SINTÉTICOS, inventados para mostrar o formato. Não vêm do sistema do experimento.",
+ "Acervo/EmprestimoLivro": "Tela: [Acervo/EmprestimoLivro] Empréstimo de livro\nMenu: Acervo › Empréstimos\nCasos de teste do QA: 12\nO que faz: registra a saída de um exemplar para um leitor, com data de devolução\nBotões: Novo empréstimo · Pesquisar · Renovar\nAções: emprestar · renovar · devolver\nCampos: leitor · exemplar · data de devolução",
+ "Acervo/ReservaLivro": "Tela: [Acervo/ReservaLivro] Reserva de livro\nMenu: Acervo › Reservas\nCasos de teste do QA: 7\nO que faz: coloca o leitor na fila de espera de um título sem exemplar livre\nBotões: Reservar · Cancelar reserva\nAções: reservar · cancelar\nCampos: leitor · título · posição na fila",
+ "Leitores/CadastroLeitor": "Tela: [Leitores/CadastroLeitor] Cadastro de leitor\nMenu: Leitores › Cadastro\nCasos de teste do QA: 9\nO que faz: cria e edita o cadastro de um leitor da biblioteca\nBotões: Adicionar · Salvar · Pesquisar\nAções: cadastrar · editar · bloquear\nCampos: nome · documento · e-mail · categoria"
+}
