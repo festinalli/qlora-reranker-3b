@@ -7,7 +7,8 @@ Os dados de treino e de teste são de um cliente e **não estão aqui**. Também
 - a configuração do QLoRA;
 - o protocolo de teste;
 - a conta do ponto de equilíbrio;
-- exemplos **sintéticos** que mostram o formato.
+- exemplos **sintéticos** que mostram o formato;
+- um exemplo **sintético** que corre de ponta a ponta numa GPU de 8 GB em menos de 10 minutos (ver «Teste rápido com dados sintéticos»).
 
 ## A tarefa
 
@@ -106,9 +107,67 @@ Métrica: tela certa em 1.º lugar. Todos os sistemas reordenam as mesmas 40 can
 | `src/avaliar.py` | avaliação em listas fixas de candidatas: top-1/3/5, MRR, McNemar contra outros sistemas e o «freio». Recusa medir o teste duas vezes |
 | `src/congelar_teste.py` | congela o teste cego (sha256, data, só leitura) |
 | `src/break_even.py` | a conta do ponto de equilíbrio, com os preços como parâmetros |
+| `src/gerar_vetores.py` | vetores de busca só com numpy (saco de palavras com hashing), para o exemplo correr sem modelo de embeddings |
+| `src/exemplo.py` | o exemplo de ponta a ponta com os dados sintéticos de `exemplos/biblioteca/` |
 | `docs/protocolo_teste_cego.md` | o protocolo de teste |
 | `docs/break_even.md` | a conta e o que ela não inclui |
 | `exemplos/` | o formato dos dados, com exemplos **sintéticos** inventados |
+| `exemplos/biblioteca/` | um conjunto **sintético** maior (catálogo, dev e teste) de uma biblioteca fictícia, para o teste rápido |
+
+## Teste rápido com dados sintéticos
+
+Para ver o processo inteiro correr sem os dados do cliente, há um exemplo com dados **sintéticos**, inventados de raiz, de um sistema de biblioteca fictício (`exemplos/biblioteca/`):
+- `catalogo.json`: 56 telas, cada uma com rota, ficha, descrição, menu, n.º de casos de QA e 8 a 10 perguntas (463 ao todo, algumas vagas);
+- `dev.json` (36 perguntas) e `teste.json` (38 perguntas), escritos à parte, sem copiar as do catálogo.
+
+```bash
+pip install -r requirements.txt
+python src/exemplo.py
+```
+
+O comando faz, em ordem:
+1. **vetores** (`src/gerar_vetores.py`). No experimento, os vetores da busca densa vinham de um modelo de embeddings. Aqui são um saco de palavras com hashing, só com numpy, para o exemplo correr sem descarregar outro modelo nem chamar API. **Este método é só para o exemplo.**
+2. **candidatas**: as 40 candidatas de cada pergunta do dev e do teste, com a mesma fusão do montador. O teste é congelado aqui (sha256 no `CONGELADO.json`).
+3. **dataset** (`src/montar_dataset.py`), descontaminado contra o dev e o teste.
+4. **treino** (`src/treinar.py`): 1 época, com a mesma configuração do experimento. Com este catálogo, são 52 passos.
+5. **dev**: o modelo base e o treinado. O limiar do freio é escolhido aqui.
+6. **teste**: medido uma vez, com o treinado e o base na mesma corrida.
+
+Tudo fica em `exemplos/biblioteca/saida/`, que não entra no git. **O teste mede-se uma vez:** se a pasta já existe, o script recusa. Para repetir o exemplo do zero, apague a pasta `exemplos/biblioteca/saida/`. Na primeira vez, o modelo base (cerca de 2 GB) é descarregado do Hugging Face.
+
+Medido na máquina do experimento (RTX 5070 de notebook, 8 GB, WSL2, as versões da tabela acima), com o modelo já em cache:
+
+| Etapa | Tempo |
+|---|---|
+| vetores, candidatas e dataset | 1,5 s |
+| treino (com a carga do modelo) | 212 s; os 52 passos levaram 141 s (2,7 s por passo) |
+| dev: base e treinado, 36 perguntas × 40 candidatas | 161 s |
+| teste: treinado e base, 38 perguntas × 40 candidatas | 157 s |
+| **total** | **531 s (8,9 min)** |
+
+Pico de memória: 3,99 GB reservados pelo PyTorch no treino e 4,06 GB na avaliação; 4,33 GB no `nvidia-smi`, para a GPU inteira.
+
+Saída resumida:
+
+```
+Perda (passo: perda): 10: 0.3083, 20: 0.1839, 30: 0.1214, 40: 0.0633, 50: 0.0475
+
+dev (36 perguntas)                    top-1  top-3    MRR
+  busca sem LLM (ordem da fusão)         12     19  0.472
+  Qwen 3B sem treino                     21     27  0.684
+  Qwen 3B com QLoRA (exemplo)            27     35  0.843
+  McNemar treinado × sem treino: só o treinado acerta 8, só o sem treino 2, p = 0.1094
+
+teste (38 perguntas)                  top-1  top-3    MRR
+  busca sem LLM (ordem da fusão)         16     21  0.540
+  Qwen 3B sem treino                     21     28  0.673
+  Qwen 3B com QLoRA (exemplo)            24     34  0.759
+  McNemar treinado × sem treino: só o treinado acerta 6, só o sem treino 3, p = 0.5078
+
+Limiar do freio escolhido no dev: 0.4
+```
+
+**Estes números não significam nada sobre o experimento.** O catálogo é inventado e pequeno, as perguntas não passaram por conferência, a busca usa um saco de palavras e o treino tem 52 passos. Eles só mostram que o processo corre de ponta a ponta: a perda desce, o adapter é gravado, o dev escolhe o limiar e o teste é medido uma vez, com a tabela e o McNemar. Noutra GPU ou noutra versão das bibliotecas, os números podem mudar um pouco.
 
 ## Como rodar (com dados próprios)
 
@@ -128,6 +187,8 @@ O dataset da rodada 2 acrescentou à base da rodada 1:
 - pedidos vagos montados por molde («quero cadastrar &lt;objeto do menu&gt;»), em que a tela principal é o «Sim».
 
 O script dessa etapa dependia do catálogo do cliente e não foi incluído.
+
+Os vetores (`.npy`) vêm do seu modelo de embeddings: um por tela (o texto da ficha) e um por pergunta do catálogo. O `src/gerar_vetores.py` só serve para o exemplo sintético. O `treinar.py` também lê a variável `RESULTADOS`, a pasta do resumo do treino.
 
 Os formatos de entrada estão em `exemplos/`: o catálogo (`catalogo_sintetico.json`), os cartões das telas (`telas_sinteticas.json`), um conjunto de teste (`teste_sintetico.json`) e exemplos de treino (`treino_sintetico.jsonl`).
 

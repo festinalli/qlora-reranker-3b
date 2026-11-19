@@ -23,6 +23,7 @@ tokenizer.json
 *.key
 
 # python
+unsloth_compiled_cache/
 __pycache__/
 *.pyc
 .venv/

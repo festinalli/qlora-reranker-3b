@@ -12,6 +12,7 @@ Variáveis (opcionais):
     MAX_EXEMPLOS=8000                                    corta o treino (os primeiros N, já embaralhados)
     OUTDIR=saida/checkpoints                             onde ficam os checkpoints (a cada 250 passos)
     LORA=saida/adapter                                   onde grava o adapter final
+    RESULTADOS=resultados                                onde grava o resumo do treino (perda, tempo, memória)
 
 O dataset vem de montar_dataset.py. O teste congelado não está em DADOS e este script não o lê.
 """
@@ -39,7 +40,7 @@ DEV       = os.path.join(DADOS, "dev_sintetico.jsonl")
 N_DEV     = 400                     # exemplos do dev sintético para a perda de validação
 OUTDIR    = os.environ.get("OUTDIR", os.path.join(RAIZ, "saida", "checkpoints"))
 LORA      = os.environ.get("LORA", os.path.join(RAIZ, "saida", "adapter"))
-RESULTADOS = os.path.join(RAIZ, "resultados")
+RESULTADOS = os.environ.get("RESULTADOS", os.path.join(RAIZ, "resultados"))
 MAX_PASSOS   = int(os.environ.get("MAX_PASSOS") or -1)
 EPOCAS       = float(os.environ.get("EPOCAS") or 1)
 MAX_EXEMPLOS = int(os.environ.get("MAX_EXEMPLOS") or 0)
@@ -71,7 +72,8 @@ print(">> Carregando dataset:", DATA, flush=True)
 ds = load_dataset("json", data_files=DATA, split="train")
 if MAX_EXEMPLOS:
     ds = ds.select(range(min(MAX_EXEMPLOS, len(ds))))
-dev = load_dataset("json", data_files=DEV, split="train").shuffle(seed=3407).select(range(N_DEV))
+dev = load_dataset("json", data_files=DEV, split="train").shuffle(seed=3407)
+dev = dev.select(range(min(N_DEV, len(dev))))
 print(">> Exemplos: treino", len(ds), "| dev", len(dev), flush=True)
 
 

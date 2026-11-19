@@ -1,0 +1,1308 @@
+{
+ "_aviso": "SINTÉTICO. Catálogo inventado de um sistema de biblioteca fictício, feito só para o exemplo de ponta a ponta (src/exemplo.py). Não vem do sistema do experimento nem de sistema real nenhum. Telas, rotas, perguntas e números de casos de QA são inventados.",
+ "telas": [
+  {
+   "rota": "Circulacao/EmprestimoLivro",
+   "ficha": {
+    "nome": "Empréstimo de exemplar",
+    "botoes": ["Novo empréstimo", "Ler código de barras", "Imprimir comprovante", "Pesquisar leitor"],
+    "acoes": ["emprestar", "imprimir comprovante", "consultar prazo"],
+    "campos": ["leitor", "exemplar", "data do empréstimo", "data prevista de devolução", "unidade"],
+    "capacidades": ["registra a saída de um exemplar para um leitor", "calcula a data de devolução pela política da categoria"]
+   },
+   "descricao": "registra a saída de um exemplar para um leitor no balcão e calcula a data de devolução",
+   "menu": "Circulação › Empréstimo",
+   "n_casos_qa": 18,
+   "perguntas": [
+    "como registro que um leitor levou um livro?",
+    "o aluno quer levar três livros pra casa, onde lanço isso?",
+    "onde passo o código de barras do livro para emprestar?",
+    "como imprimo o comprovante de empréstimo para o leitor?",
+    "quero emprestar um livro",
+    "onde faço a saída de um exemplar no balcão?",
+    "o sistema calcula sozinho a data de devolução quando eu empresto?",
+    "como faço um empréstimo para um professor?",
+    "onde vejo até quando o leitor pode ficar com o livro que acabei de emprestar?",
+    "preciso liberar um livro para uma leitora levar, por onde começo?"
+   ]
+  },
+  {
+   "rota": "Circulacao/DevolucaoExemplar",
+   "ficha": {
+    "nome": "Devolução de exemplar",
+    "botoes": ["Registrar devolução", "Ler código de barras", "Imprimir recibo", "Devolução em lote"],
+    "acoes": ["devolver", "registrar atraso", "encaminhar para reserva"],
+    "campos": ["exemplar", "leitor", "data da devolução", "dias de atraso", "estado do exemplar"],
+    "capacidades": ["dá baixa no empréstimo quando o exemplar volta", "avisa se o exemplar tem reserva esperando", "gera a multa quando há atraso"]
+   },
+   "descricao": "dá baixa no empréstimo quando o exemplar volta ao balcão, calcula o atraso e avisa se há reserva",
+   "menu": "Circulação › Devolução",
+   "n_casos_qa": 15,
+   "perguntas": [
+    "onde dou baixa na devolução de um exemplar?",
+    "o leitor trouxe o livro de volta, como registro?",
+    "como faço a devolução de vários livros de uma vez que vieram da caixa de devolução?",
+    "o livro voltou rasgado, onde anoto o estado dele na devolução?",
+    "devolução",
+    "como recebo de volta um livro que estava atrasado?",
+    "onde vejo quantos dias de atraso teve o livro que acabou de ser devolvido?",
+    "preciso imprimir o recibo de devolução, onde fica?",
+    "o livro devolvido tem alguém esperando na fila, onde o sistema mostra isso?"
+   ]
+  },
+  {
+   "rota": "Circulacao/RenovacaoEmprestimo",
+   "ficha": {
+    "nome": "Renovação de empréstimo",
+    "botoes": ["Renovar", "Renovar todos", "Pesquisar leitor", "Ver limite de renovações"],
+    "acoes": ["renovar", "renovar em lote", "consultar renovações"],
+    "campos": ["leitor", "exemplar", "nova data de devolução", "renovações feitas", "renovações permitidas"],
+    "capacidades": ["estende o prazo de um empréstimo em aberto", "bloqueia a renovação se o título tem reserva"]
+   },
+   "descricao": "estende o prazo de empréstimos em aberto, respeitando o limite de renovações e as reservas",
+   "menu": "Circulação › Renovação",
+   "n_casos_qa": 11,
+   "perguntas": [
+    "como renovo o prazo de um livro que já está com o leitor?",
+    "o leitor ligou pedindo mais uma semana com o livro, onde faço?",
+    "quero renovar todos os empréstimos de um leitor de uma vez",
+    "por que não consigo renovar um livro que tem reserva?",
+    "quantas vezes o aluno ainda pode renovar esse livro?",
+    "renovar",
+    "onde estendo a data de devolução de um empréstimo?",
+    "a professora quer ficar mais tempo com os livros dela, como faço?",
+    "onde vejo a nova data depois de renovar?"
+   ]
+  },
+  {
+   "rota": "Circulacao/ReservaTitulo",
+   "ficha": {
+    "nome": "Reserva de título",
+    "botoes": ["Reservar", "Cancelar reserva", "Ver fila", "Avisar leitor"],
+    "acoes": ["reservar", "cancelar reserva", "reordenar fila", "avisar disponibilidade"],
+    "campos": ["leitor", "título", "posição na fila", "data da reserva", "validade da retirada"],
+    "capacidades": ["coloca o leitor na fila de espera de um título sem exemplar livre", "avisa o leitor quando o exemplar chega"]
+   },
+   "descricao": "coloca o leitor na fila de espera de um título sem exemplar disponível e avisa quando ele volta",
+   "menu": "Circulação › Reservas",
+   "n_casos_qa": 13,
+   "perguntas": [
+    "o leitor quer ficar na fila de um título que está todo emprestado, onde faço isso?",
+    "como cancelo a reserva de um leitor?",
+    "onde vejo em que posição da fila o leitor está?",
+    "quero reservar um livro para uma aluna",
+    "como aviso o leitor que o livro que ele reservou chegou?",
+    "quanto tempo o leitor tem para retirar o livro reservado?",
+    "todos os exemplares estão emprestados e o leitor quer garantir o próximo, o que faço?",
+    "reserva",
+    "dá para mudar a ordem da fila de espera de um livro?",
+    "quem está esperando por esse título?"
+   ]
+  },
+  {
+   "rota": "Circulacao/EmprestimoEntreBibliotecas",
+   "ficha": {
+    "nome": "Empréstimo entre bibliotecas",
+    "botoes": ["Nova solicitação", "Registrar envio", "Registrar retorno", "Pesquisar instituição"],
+    "acoes": ["solicitar a outra biblioteca", "atender solicitação", "registrar envio", "registrar retorno"],
+    "campos": ["instituição parceira", "obra solicitada", "leitor solicitante", "situação", "prazo acordado"],
+    "capacidades": ["pede a outra instituição uma obra que não temos", "empresta uma obra nossa para outra biblioteca"]
+   },
+   "descricao": "controla os pedidos de obras a outras bibliotecas e os pedidos que outras bibliotecas nos fazem",
+   "menu": "Circulação › Entre bibliotecas",
+   "n_casos_qa": 8,
+   "perguntas": [
+    "o leitor precisa de um livro que não temos, dá para pedir para outra biblioteca?",
+    "uma universidade parceira pediu um livro nosso emprestado, onde registro?",
+    "como acompanho os livros que pedimos para outras instituições?",
+    "onde registro que o livro emprestado de outra biblioteca já foi devolvido para eles?",
+    "pedir livro de outra biblioteca",
+    "quais bibliotecas parceiras estão com livros nossos?",
+    "como registro o envio pelo correio de um livro para outra instituição?",
+    "onde vejo o prazo combinado com a outra biblioteca?"
+   ]
+  },
+  {
+   "rota": "Circulacao/AtrasosPendencias",
+   "ficha": {
+    "nome": "Atrasos e pendências",
+    "botoes": ["Filtrar", "Enviar cobrança", "Exportar lista", "Ver leitor"],
+    "acoes": ["listar atrasos", "enviar cobrança", "exportar"],
+    "campos": ["leitor", "exemplar", "dias de atraso", "última cobrança", "categoria do leitor"],
+    "capacidades": ["lista os empréstimos vencidos", "envia cobrança aos leitores com livro atrasado"]
+   },
+   "descricao": "lista os empréstimos vencidos e permite cobrar os leitores em atraso",
+   "menu": "Circulação › Atrasos",
+   "n_casos_qa": 12,
+   "perguntas": [
+    "onde vejo quem está com livro atrasado?",
+    "quero mandar uma cobrança para todos os leitores atrasados",
+    "como tiro a lista dos empréstimos vencidos há mais de 30 dias?",
+    "atrasados",
+    "quais alunos estão devendo livro?",
+    "onde vejo quando foi a última vez que cobramos um leitor?",
+    "preciso exportar a lista de atrasos para a coordenação",
+    "tem como filtrar os atrasos só dos professores?",
+    "quem não devolveu os livros no prazo?"
+   ]
+  },
+  {
+   "rota": "Circulacao/PoliticaEmprestimo",
+   "ficha": {
+    "nome": "Política de empréstimo",
+    "botoes": ["Nova regra", "Salvar", "Duplicar regra", "Excluir"],
+    "acoes": ["definir prazo", "definir limite de itens", "definir limite de renovações"],
+    "campos": ["categoria do leitor", "tipo de material", "prazo em dias", "máximo de itens", "máximo de renovações"],
+    "capacidades": ["define prazo e limite de itens por categoria de leitor e tipo de material"]
+   },
+   "descricao": "define o prazo de empréstimo, o limite de itens e de renovações por categoria de leitor e tipo de material",
+   "menu": "Circulação › Políticas",
+   "n_casos_qa": 9,
+   "perguntas": [
+    "onde mudo o prazo de empréstimo dos alunos de 7 para 14 dias?",
+    "como defino quantos livros um professor pode levar ao mesmo tempo?",
+    "quero que DVDs fiquem só 3 dias com o leitor, onde configuro?",
+    "onde fica a regra de quantas renovações cada categoria pode fazer?",
+    "regras de empréstimo",
+    "como crio uma regra de empréstimo para a categoria comunidade?",
+    "qual é o limite de itens para visitantes e onde altero?",
+    "a direção pediu prazo maior para pós-graduação, onde mexo nisso?"
+   ]
+  },
+  {
+   "rota": "Circulacao/CalendarioFeriados",
+   "ficha": {
+    "nome": "Calendário de feriados e recessos",
+    "botoes": ["Adicionar data", "Importar feriados", "Salvar", "Ver ano"],
+    "acoes": ["cadastrar feriado", "cadastrar recesso", "importar feriados nacionais"],
+    "campos": ["data", "descrição", "unidade", "tipo", "empurra devoluções"],
+    "capacidades": ["marca os dias sem expediente para que nenhuma devolução vença neles"]
+   },
+   "descricao": "marca feriados e recessos para que o prazo de devolução não caia em dia sem expediente",
+   "menu": "Circulação › Calendário",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "onde cadastro o feriado municipal para não vencer devolução nesse dia?",
+    "a biblioteca vai fechar no recesso de fim de ano, como evito que os prazos vençam?",
+    "como importo os feriados nacionais do ano que vem?",
+    "feriado",
+    "por que a devolução pulou para segunda-feira? onde vejo os dias fechados?",
+    "a unidade do centro vai ficar fechada dois dias para reforma, onde lanço isso?",
+    "onde vejo o calendário de dias sem expediente?",
+    "como marco ponto facultativo para os prazos de devolução?"
+   ]
+  },
+  {
+   "rota": "Leitores/CadastroLeitor",
+   "ficha": {
+    "nome": "Cadastro de leitor",
+    "botoes": ["Adicionar", "Salvar", "Pesquisar", "Anexar foto"],
+    "acoes": ["cadastrar", "editar", "inativar"],
+    "campos": ["nome", "documento", "e-mail", "telefone", "endereço", "categoria", "data de nascimento"],
+    "capacidades": ["cria e edita o cadastro de um leitor da biblioteca"]
+   },
+   "descricao": "cria e edita o cadastro de um leitor: dados pessoais, contato e categoria",
+   "menu": "Leitores › Cadastro",
+   "n_casos_qa": 16,
+   "perguntas": [
+    "quero cadastrar um leitor",
+    "como atualizo o telefone de um leitor?",
+    "onde mudo o e-mail de uma aluna?",
+    "um morador do bairro quer se inscrever na biblioteca, por onde começo?",
+    "como coloco a foto no cadastro do leitor?",
+    "o leitor mudou de endereço, onde altero?",
+    "como passo um leitor de aluno para ex-aluno?",
+    "novo leitor",
+    "onde corrijo o nome errado de um leitor?",
+    "como inativo o cadastro de um leitor que se mudou de cidade?"
+   ]
+  },
+  {
+   "rota": "Leitores/CarteirinhaLeitor",
+   "ficha": {
+    "nome": "Carteirinha do leitor",
+    "botoes": ["Emitir carteirinha", "Segunda via", "Imprimir", "Cancelar carteirinha"],
+    "acoes": ["emitir", "emitir segunda via", "imprimir", "cancelar"],
+    "campos": ["leitor", "número da carteirinha", "validade", "foto", "modelo de impressão"],
+    "capacidades": ["emite e imprime a carteirinha com código de barras", "cancela a carteirinha perdida e gera a segunda via"]
+   },
+   "descricao": "emite, imprime e cancela a carteirinha do leitor, com código de barras e validade",
+   "menu": "Leitores › Carteirinhas",
+   "n_casos_qa": 7,
+   "perguntas": [
+    "o leitor perdeu a carteirinha, como faço a segunda via?",
+    "onde imprimo a carteirinha de um leitor novo?",
+    "como renovo a validade da carteirinha?",
+    "carteirinha",
+    "quero imprimir as carteirinhas da turma nova de uma vez",
+    "a carteirinha antiga foi roubada, como cancelo para ninguém usar?",
+    "onde mudo o modelo da carteirinha que sai na impressora?",
+    "como gero o código de barras do cartão do leitor?"
+   ]
+  },
+  {
+   "rota": "Leitores/BloqueioLeitor",
+   "ficha": {
+    "nome": "Bloqueio e suspensão de leitor",
+    "botoes": ["Bloquear", "Desbloquear", "Suspender", "Ver motivos"],
+    "acoes": ["bloquear", "desbloquear", "suspender por dias"],
+    "campos": ["leitor", "motivo", "início", "fim da suspensão", "responsável"],
+    "capacidades": ["impede novos empréstimos de um leitor com pendência", "suspende o leitor por um número de dias"]
+   },
+   "descricao": "bloqueia ou suspende um leitor, impedindo novos empréstimos até resolver a pendência",
+   "menu": "Leitores › Bloqueios",
+   "n_casos_qa": 10,
+   "perguntas": [
+    "onde bloqueio um leitor que está com livro atrasado?",
+    "o leitor pagou a multa, como tiro o bloqueio dele?",
+    "como suspendo um aluno por 15 dias?",
+    "por que o sistema não deixa esse leitor pegar livro?",
+    "desbloquear leitor",
+    "quem bloqueou esse leitor e por quê?",
+    "quero impedir que um leitor faça empréstimos até devolver o que deve",
+    "onde vejo até quando vai a suspensão de um leitor?",
+    "como libero um leitor que estava suspenso?"
+   ]
+  },
+  {
+   "rota": "Leitores/HistoricoLeitor",
+   "ficha": {
+    "nome": "Histórico do leitor",
+    "botoes": ["Pesquisar leitor", "Filtrar período", "Exportar", "Imprimir"],
+    "acoes": ["consultar histórico", "exportar"],
+    "campos": ["leitor", "exemplar", "data do empréstimo", "data da devolução", "multas", "reservas"],
+    "capacidades": ["mostra tudo o que um leitor já emprestou, devolveu, reservou e pagou"]
+   },
+   "descricao": "mostra o histórico de um leitor: empréstimos, devoluções, reservas e multas",
+   "menu": "Leitores › Histórico",
+   "n_casos_qa": 8,
+   "perguntas": [
+    "onde vejo todos os livros que um leitor já pegou?",
+    "o leitor diz que devolveu o livro em março, onde confiro?",
+    "como imprimo o histórico de empréstimos de uma aluna?",
+    "histórico do leitor",
+    "quero ver as multas que esse leitor já pagou",
+    "esse leitor já leu este título antes?",
+    "como exporto o histórico de um leitor do último ano?",
+    "onde vejo o que um leitor tem emprestado agora e o que já devolveu?"
+   ]
+  },
+  {
+   "rota": "Leitores/CategoriaLeitor",
+   "ficha": {
+    "nome": "Categorias de leitor",
+    "botoes": ["Nova categoria", "Salvar", "Excluir", "Ver leitores da categoria"],
+    "acoes": ["criar categoria", "editar categoria", "excluir categoria"],
+    "campos": ["nome da categoria", "descrição", "exige comprovante", "validade do cadastro"],
+    "capacidades": ["mantém os tipos de leitor (aluno, professor, servidor, comunidade)"]
+   },
+   "descricao": "mantém os tipos de leitor, como aluno, professor, servidor e comunidade",
+   "menu": "Leitores › Categorias",
+   "n_casos_qa": 5,
+   "perguntas": [
+    "como crio uma categoria nova de leitor para pesquisadores visitantes?",
+    "onde vejo quais tipos de leitor existem?",
+    "quero mudar o nome da categoria comunidade para público externo",
+    "categorias",
+    "dá para excluir uma categoria de leitor que não usamos mais?",
+    "onde digo que a categoria aluno precisa de comprovante de matrícula?",
+    "quantos leitores tem em cada categoria?",
+    "como defino por quanto tempo vale o cadastro de cada tipo de leitor?"
+   ]
+  },
+  {
+   "rota": "Leitores/ImportacaoLeitores",
+   "ficha": {
+    "nome": "Importação de leitores",
+    "botoes": ["Escolher planilha", "Validar", "Importar", "Baixar modelo"],
+    "acoes": ["importar em lote", "validar planilha", "baixar modelo"],
+    "campos": ["arquivo", "categoria padrão", "linhas válidas", "linhas com erro"],
+    "capacidades": ["cadastra muitos leitores de uma vez a partir de uma planilha"]
+   },
+   "descricao": "cadastra muitos leitores de uma vez a partir de uma planilha, com validação linha a linha",
+   "menu": "Leitores › Importação",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "a secretaria mandou a planilha com os alunos novos, como cadastro todos de uma vez?",
+    "onde baixo o modelo de planilha para importar leitores?",
+    "a importação deu erro em algumas linhas, onde vejo quais?",
+    "importar leitores",
+    "como subo uma lista de 300 calouros no sistema?",
+    "dá para importar leitores de um arquivo csv?",
+    "quero cadastrar a turma inteira sem digitar um por um",
+    "onde escolho a categoria dos leitores que vou importar da planilha?"
+   ]
+  },
+  {
+   "rota": "Leitores/NadaConsta",
+   "ficha": {
+    "nome": "Declaração de nada consta",
+    "botoes": ["Pesquisar leitor", "Emitir declaração", "Imprimir", "Validar código"],
+    "acoes": ["emitir nada consta", "validar autenticidade"],
+    "campos": ["leitor", "pendências", "código de verificação", "data de emissão"],
+    "capacidades": ["emite a declaração de que o leitor não deve livros nem multas"]
+   },
+   "descricao": "emite a declaração de que o leitor não tem livros nem multas pendentes, com código de verificação",
+   "menu": "Leitores › Nada consta",
+   "n_casos_qa": 7,
+   "perguntas": [
+    "o aluno vai se formar e precisa de um documento dizendo que não deve nada à biblioteca, onde emito?",
+    "como tiro o nada consta de um servidor que vai se aposentar?",
+    "a secretaria recebeu uma declaração de quitação, como confiro se é verdadeira?",
+    "nada consta",
+    "onde imprimo a declaração de quitação com a biblioteca?",
+    "o leitor precisa provar que devolveu tudo, o que emito pra ele?",
+    "por que não consigo emitir a declaração para esse aluno?",
+    "como valido o código que vem na declaração?"
+   ]
+  },
+  {
+   "rota": "Catalogacao/RegistroObra",
+   "ficha": {
+    "nome": "Registro de obra",
+    "botoes": ["Nova obra", "Buscar por ISBN", "Salvar", "Duplicar registro"],
+    "acoes": ["catalogar", "editar registro", "buscar dados pelo ISBN"],
+    "campos": ["título", "autor", "ISBN", "editora", "ano", "edição", "assuntos", "classificação"],
+    "capacidades": ["cria o registro bibliográfico de uma obra", "preenche os dados a partir do ISBN"]
+   },
+   "descricao": "cria e edita o registro bibliográfico de uma obra: título, autoria, editora, assuntos e classificação",
+   "menu": "Catalogação › Obras",
+   "n_casos_qa": 20,
+   "perguntas": [
+    "como cadastro um livro novo no catálogo?",
+    "onde corrijo o nome do autor de um livro?",
+    "dá para puxar os dados do livro pelo ISBN?",
+    "catalogar",
+    "chegou a segunda edição de um livro que já temos, como registro?",
+    "onde coloco os assuntos de uma obra?",
+    "quero mudar a classificação de um livro que estava errada",
+    "como registro um livro com três autores?",
+    "onde edito o ano de publicação de uma obra?",
+    "como catalogo um DVD?"
+   ]
+  },
+  {
+   "rota": "Catalogacao/ExemplarObra",
+   "ficha": {
+    "nome": "Exemplares da obra",
+    "botoes": ["Adicionar exemplar", "Gerar tombo", "Salvar", "Ver localização"],
+    "acoes": ["incluir exemplar", "gerar número de tombo", "alterar localização"],
+    "campos": ["obra", "número de tombo", "código de barras", "unidade", "estante", "situação"],
+    "capacidades": ["cadastra os exemplares físicos de uma obra com tombo e código de barras"]
+   },
+   "descricao": "cadastra os exemplares físicos de uma obra, com número de tombo, código de barras e localização",
+   "menu": "Catalogação › Exemplares",
+   "n_casos_qa": 14,
+   "perguntas": [
+    "compramos mais dois exemplares de um livro que já está no catálogo, onde adiciono?",
+    "onde vejo o número de tombo de um exemplar?",
+    "como gero o código de barras de um exemplar novo?",
+    "exemplares",
+    "quantas cópias desse livro nós temos?",
+    "em qual estante fica esse exemplar?",
+    "como mudo a situação de um exemplar para disponível?",
+    "onde ligo o exemplar a uma unidade da biblioteca?",
+    "preciso cadastrar a cópia física de uma obra já catalogada"
+   ]
+  },
+  {
+   "rota": "Catalogacao/Autoridades",
+   "ficha": {
+    "nome": "Autoridades (autores e assuntos)",
+    "botoes": ["Nova autoridade", "Unificar", "Salvar", "Ver obras ligadas"],
+    "acoes": ["cadastrar autor", "cadastrar assunto", "unificar duplicados", "criar remissiva"],
+    "campos": ["forma autorizada", "formas variantes", "tipo", "datas", "nota"],
+    "capacidades": ["mantém a forma padronizada dos nomes de autores e dos assuntos"]
+   },
+   "descricao": "mantém a forma padronizada dos nomes de autores e dos assuntos usados na catalogação",
+   "menu": "Catalogação › Autoridades",
+   "n_casos_qa": 9,
+   "perguntas": [
+    "o mesmo autor aparece escrito de dois jeitos no catálogo, como junto?",
+    "onde cadastro a forma padrão do nome de um autor?",
+    "quero criar um assunto novo para usar na catalogação",
+    "autoridades",
+    "como faço para quem pesquisar pelo pseudônimo achar o nome verdadeiro do autor?",
+    "onde vejo todas as obras ligadas a um assunto?",
+    "tem assunto duplicado, como unifico?",
+    "como registro as datas de nascimento e morte de um autor?"
+   ]
+  },
+  {
+   "rota": "Catalogacao/ImportacaoMarc",
+   "ficha": {
+    "nome": "Importação de registros MARC",
+    "botoes": ["Escolher arquivo", "Pré-visualizar", "Importar", "Ver duplicados"],
+    "acoes": ["importar registros", "detectar duplicados", "mesclar registro"],
+    "campos": ["arquivo", "formato", "registros lidos", "duplicados", "importados"],
+    "capacidades": ["traz registros bibliográficos prontos de arquivos MARC de outras bibliotecas"]
+   },
+   "descricao": "importa registros bibliográficos prontos em arquivo MARC, avisando sobre duplicados",
+   "menu": "Catalogação › Importação",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "a biblioteca nacional mandou um arquivo com registros prontos, como trago para o catálogo?",
+    "como importo registros MARC?",
+    "onde vejo quais registros do arquivo já existiam no catálogo?",
+    "importar catálogo",
+    "quero aproveitar a catalogação de outra biblioteca sem digitar tudo",
+    "o fornecedor mandou os registros dos livros comprados num arquivo, onde subo?",
+    "como faço para não duplicar obras ao importar um lote?",
+    "onde vejo quantos registros foram importados?"
+   ]
+  },
+  {
+   "rota": "Catalogacao/EtiquetasLombada",
+   "ficha": {
+    "nome": "Etiquetas de lombada",
+    "botoes": ["Selecionar exemplares", "Gerar etiquetas", "Imprimir", "Configurar folha"],
+    "acoes": ["gerar etiquetas", "imprimir etiquetas", "configurar modelo de folha"],
+    "campos": ["exemplares", "modelo de folha", "posição inicial", "conteúdo da etiqueta"],
+    "capacidades": ["imprime as etiquetas de lombada e de código de barras dos exemplares"]
+   },
+   "descricao": "imprime etiquetas de lombada e de código de barras para os exemplares selecionados",
+   "menu": "Catalogação › Etiquetas",
+   "n_casos_qa": 5,
+   "perguntas": [
+    "como imprimo as etiquetas da lombada dos livros novos?",
+    "a etiqueta está saindo torta na folha, onde configuro o modelo?",
+    "quero imprimir só as etiquetas de código de barras",
+    "etiquetas",
+    "como começo a impressão da terceira etiqueta da folha que já está pela metade?",
+    "onde gero a etiqueta com o número de chamada do livro?",
+    "preciso refazer a etiqueta de um livro que descolou",
+    "onde escolho o que aparece na etiqueta da lombada?"
+   ]
+  },
+  {
+   "rota": "Acervo/Inventario",
+   "ficha": {
+    "nome": "Inventário do acervo",
+    "botoes": ["Novo inventário", "Ler código de barras", "Encerrar inventário", "Ver não localizados"],
+    "acoes": ["abrir inventário", "registrar leitura", "encerrar", "listar não localizados"],
+    "campos": ["unidade", "setor", "exemplares lidos", "exemplares esperados", "não localizados"],
+    "capacidades": ["confere o acervo físico com o cadastro por leitura de código de barras"]
+   },
+   "descricao": "confere o acervo da estante com o cadastro, lendo os códigos de barras, e lista o que não foi encontrado",
+   "menu": "Acervo › Inventário",
+   "n_casos_qa": 10,
+   "perguntas": [
+    "vamos fazer a contagem anual do acervo, onde começo?",
+    "como vejo os livros que não foram achados na estante durante o inventário?",
+    "onde passo o leitor de código de barras para conferir as estantes?",
+    "inventário",
+    "como encerro o inventário da seção infantil?",
+    "quantos livros faltaram na conferência do último ano?",
+    "quero conferir se o que está na estante bate com o sistema",
+    "dá para fazer o inventário por setor?"
+   ]
+  },
+  {
+   "rota": "Acervo/BaixaExemplar",
+   "ficha": {
+    "nome": "Baixa de exemplar",
+    "botoes": ["Dar baixa", "Desfazer baixa", "Pesquisar exemplar", "Imprimir termo"],
+    "acoes": ["dar baixa", "desfazer baixa", "imprimir termo de descarte"],
+    "campos": ["exemplar", "motivo", "data", "responsável", "destino"],
+    "capacidades": ["retira do acervo um exemplar perdido, danificado ou descartado"]
+   },
+   "descricao": "retira do acervo exemplares perdidos, danificados ou descartados, com motivo e termo",
+   "menu": "Acervo › Baixas",
+   "n_casos_qa": 8,
+   "perguntas": [
+    "o livro molhou e não tem conserto, como tiro ele do acervo?",
+    "onde registro o descarte de livros desatualizados?",
+    "como dou baixa num exemplar que sumiu?",
+    "descartar livro",
+    "dei baixa no exemplar errado, dá para desfazer?",
+    "preciso imprimir o termo de descarte para a direção assinar",
+    "vamos doar livros repetidos para uma escola, onde registro a saída do acervo?",
+    "onde vejo quem deu baixa nesse exemplar?"
+   ]
+  },
+  {
+   "rota": "Acervo/TransferenciaExemplar",
+   "ficha": {
+    "nome": "Transferência de exemplar",
+    "botoes": ["Nova transferência", "Enviar", "Confirmar recebimento", "Pesquisar"],
+    "acoes": ["transferir entre unidades", "confirmar recebimento", "mudar de setor"],
+    "campos": ["exemplar", "unidade de origem", "unidade de destino", "situação", "data de envio"],
+    "capacidades": ["move exemplares entre unidades ou setores da biblioteca"]
+   },
+   "descricao": "move exemplares de uma unidade ou setor para outro e acompanha o recebimento",
+   "menu": "Acervo › Transferências",
+   "n_casos_qa": 7,
+   "perguntas": [
+    "como mando livros da unidade central para a filial do bairro?",
+    "chegou uma caixa de livros transferidos, onde confirmo o recebimento?",
+    "quero mover uns livros da sala infantil para a sala juvenil no sistema",
+    "transferir livro",
+    "onde acompanho as transferências que ainda não chegaram?",
+    "o livro está registrado na unidade errada, como passo para a certa?",
+    "como envio exemplares para outra unidade?",
+    "onde vejo de qual unidade veio esse exemplar?"
+   ]
+  },
+  {
+   "rota": "Acervo/ConservacaoRestauro",
+   "ficha": {
+    "nome": "Conservação e restauro",
+    "botoes": ["Enviar para restauro", "Registrar retorno", "Pesquisar", "Ver em restauro"],
+    "acoes": ["enviar para encadernação", "enviar para restauro", "registrar retorno"],
+    "campos": ["exemplar", "serviço", "oficina", "data de envio", "custo", "previsão de retorno"],
+    "capacidades": ["acompanha exemplares enviados para encadernação ou restauro"]
+   },
+   "descricao": "acompanha exemplares enviados para encadernação, higienização ou restauro e o retorno deles",
+   "menu": "Acervo › Conservação",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "o livro está com a capa soltando, onde registro que ele foi para a encadernação?",
+    "quais livros estão no restauro agora?",
+    "a oficina devolveu os livros restaurados, onde dou entrada?",
+    "restauro",
+    "quanto custou o restauro desse exemplar?",
+    "como tiro um livro de circulação enquanto ele está sendo consertado?",
+    "onde vejo a previsão de volta dos livros que foram para encadernar?",
+    "quero mandar umas revistas antigas para higienização"
+   ]
+  },
+  {
+   "rota": "Acervo/PesquisaAcervo",
+   "ficha": {
+    "nome": "Pesquisa no acervo",
+    "botoes": ["Pesquisar", "Busca avançada", "Ver disponibilidade", "Exportar referência"],
+    "acoes": ["pesquisar por título", "pesquisar por autor", "pesquisar por assunto", "ver disponibilidade"],
+    "campos": ["termo", "autor", "assunto", "tipo de material", "unidade", "disponível"],
+    "capacidades": ["procura obras no catálogo e mostra se há exemplar disponível"]
+   },
+   "descricao": "procura obras no catálogo por título, autor ou assunto e mostra onde há exemplar disponível",
+   "menu": "Acervo › Pesquisa",
+   "n_casos_qa": 17,
+   "perguntas": [
+    "como sei se a biblioteca tem um livro?",
+    "onde procuro livros de um autor?",
+    "tem algum exemplar disponível desse título agora?",
+    "pesquisar livro",
+    "quero ver todos os livros sobre jardinagem que temos",
+    "como faço uma busca combinando autor e ano?",
+    "em qual unidade tem esse livro para pegar hoje?",
+    "como gero a referência de um livro para um trabalho?",
+    "onde encontro os filmes em DVD do acervo?"
+   ]
+  },
+  {
+   "rota": "Aquisicoes/SugestaoCompra",
+   "ficha": {
+    "nome": "Sugestões de compra",
+    "botoes": ["Nova sugestão", "Aprovar", "Recusar", "Enviar para pedido"],
+    "acoes": ["registrar sugestão", "aprovar", "recusar", "avisar leitor"],
+    "campos": ["título sugerido", "autor", "quem sugeriu", "justificativa", "situação"],
+    "capacidades": ["recebe e avalia as sugestões de livros feitas por leitores e professores"]
+   },
+   "descricao": "recebe e avalia as sugestões de compra de livros feitas pelos leitores e professores",
+   "menu": "Aquisições › Sugestões",
+   "n_casos_qa": 7,
+   "perguntas": [
+    "um professor quer que a biblioteca compre um livro para a disciplina dele, onde registro?",
+    "onde vejo os livros que os leitores pediram para comprar?",
+    "como aprovo uma sugestão de compra?",
+    "sugestões",
+    "o leitor quer saber se a sugestão dele foi aceita, onde vejo?",
+    "quero recusar uma sugestão explicando o motivo",
+    "como transformo as sugestões aprovadas num pedido?",
+    "a comunidade pode indicar livros para a biblioteca comprar?"
+   ]
+  },
+  {
+   "rota": "Aquisicoes/PedidoCompra",
+   "ficha": {
+    "nome": "Pedido de compra",
+    "botoes": ["Novo pedido", "Adicionar item", "Enviar ao fornecedor", "Cancelar pedido"],
+    "acoes": ["criar pedido", "enviar pedido", "cancelar item"],
+    "campos": ["fornecedor", "itens", "quantidade", "valor unitário", "verba", "situação do pedido"],
+    "capacidades": ["monta e envia pedidos de livros aos fornecedores"]
+   },
+   "descricao": "monta e envia pedidos de compra de livros aos fornecedores, abatendo da verba",
+   "menu": "Aquisições › Pedidos",
+   "n_casos_qa": 12,
+   "perguntas": [
+    "como faço um pedido de compra de livros para a livraria?",
+    "onde vejo os pedidos que ainda não foram entregues?",
+    "preciso cancelar um item de um pedido já enviado",
+    "comprar livros",
+    "como coloco vinte exemplares do mesmo título num pedido?",
+    "onde escolho de qual verba sai a compra?",
+    "quero mandar o pedido para o fornecedor por e-mail direto do sistema",
+    "qual é a situação do pedido que fizemos mês passado?"
+   ]
+  },
+  {
+   "rota": "Aquisicoes/RecebimentoMaterial",
+   "ficha": {
+    "nome": "Recebimento de material",
+    "botoes": ["Receber pedido", "Conferir itens", "Registrar nota", "Apontar divergência"],
+    "acoes": ["receber", "conferir", "registrar nota fiscal", "apontar falta"],
+    "campos": ["pedido", "nota fiscal", "itens recebidos", "itens faltantes", "data de entrega"],
+    "capacidades": ["confere a entrega do fornecedor contra o pedido e libera os itens para catalogação"]
+   },
+   "descricao": "confere a entrega do fornecedor contra o pedido, registra a nota e libera os livros para catalogação",
+   "menu": "Aquisições › Recebimento",
+   "n_casos_qa": 9,
+   "perguntas": [
+    "chegaram as caixas da livraria, onde confiro com o pedido?",
+    "veio um livro a menos na entrega, onde anoto?",
+    "onde lanço a nota fiscal da compra de livros?",
+    "recebimento",
+    "como libero os livros recebidos para a catalogação?",
+    "a editora mandou o título errado, onde registro a divergência?",
+    "quero ver o que já chegou de um pedido",
+    "onde dou entrada na compra que acabou de ser entregue?"
+   ]
+  },
+  {
+   "rota": "Aquisicoes/Fornecedores",
+   "ficha": {
+    "nome": "Fornecedores",
+    "botoes": ["Novo fornecedor", "Salvar", "Inativar", "Ver pedidos"],
+    "acoes": ["cadastrar fornecedor", "editar", "inativar"],
+    "campos": ["razão social", "CNPJ", "contato", "e-mail", "prazo médio de entrega", "avaliação"],
+    "capacidades": ["mantém o cadastro das livrarias, editoras e distribuidoras"]
+   },
+   "descricao": "mantém o cadastro das livrarias, editoras e distribuidoras de quem a biblioteca compra",
+   "menu": "Aquisições › Fornecedores",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "como cadastro uma livraria nova como fornecedor?",
+    "onde atualizo o telefone de contato da distribuidora?",
+    "quero parar de comprar de uma editora, como inativo?",
+    "fornecedores",
+    "qual fornecedor entrega mais rápido?",
+    "onde vejo todos os pedidos feitos a um fornecedor?",
+    "como avalio um fornecedor que atrasou a entrega?",
+    "onde fica o CNPJ da livraria que nos atende?"
+   ]
+  },
+  {
+   "rota": "Aquisicoes/Doacoes",
+   "ficha": {
+    "nome": "Doações recebidas",
+    "botoes": ["Registrar doação", "Triar itens", "Emitir agradecimento", "Pesquisar doador"],
+    "acoes": ["registrar doação", "triar", "emitir carta de agradecimento"],
+    "campos": ["doador", "data", "quantidade de itens", "itens incorporados", "itens descartados"],
+    "capacidades": ["registra livros doados, a triagem e a carta de agradecimento ao doador"]
+   },
+   "descricao": "registra livros recebidos em doação, a triagem do que entra no acervo e o agradecimento ao doador",
+   "menu": "Aquisições › Doações",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "uma família trouxe duas caixas de livros de presente, onde registro?",
+    "como emito a carta de agradecimento para quem doou livros?",
+    "onde marco quais livros doados vão entrar no acervo e quais não?",
+    "doação",
+    "quantos livros recebemos de doação este ano?",
+    "quero ver tudo o que um doador já deu para a biblioteca",
+    "como registro uma doação de revistas antigas?",
+    "um autor da cidade doou os livros dele, onde lanço?"
+   ]
+  },
+  {
+   "rota": "Aquisicoes/Orcamento",
+   "ficha": {
+    "nome": "Orçamento de aquisições",
+    "botoes": ["Nova verba", "Remanejar", "Ver gastos", "Fechar exercício"],
+    "acoes": ["cadastrar verba", "remanejar valor", "acompanhar gasto"],
+    "campos": ["ano", "área", "valor previsto", "valor comprometido", "valor gasto", "saldo"],
+    "capacidades": ["controla a verba de compra por ano e por área do conhecimento"]
+   },
+   "descricao": "controla a verba de compra de material por ano e por área, com o saldo comprometido e gasto",
+   "menu": "Aquisições › Orçamento",
+   "n_casos_qa": 5,
+   "perguntas": [
+    "quanto ainda temos de verba para comprar livros este ano?",
+    "como passo dinheiro da verba de exatas para humanas?",
+    "onde cadastro o orçamento do ano que vem?",
+    "orçamento",
+    "quanto já gastamos com livros de medicina?",
+    "como fecho o exercício do ano?",
+    "onde vejo o que está comprometido em pedidos ainda não pagos?",
+    "qual área está com o saldo mais baixo?"
+   ]
+  },
+  {
+   "rota": "Periodicos/AssinaturaPeriodico",
+   "ficha": {
+    "nome": "Assinaturas de periódicos",
+    "botoes": ["Nova assinatura", "Renovar assinatura", "Cancelar", "Ver vencimentos"],
+    "acoes": ["assinar", "renovar assinatura", "cancelar assinatura"],
+    "campos": ["título do periódico", "editora", "periodicidade", "início", "fim", "valor anual"],
+    "capacidades": ["controla as assinaturas de revistas e jornais e seus vencimentos"]
+   },
+   "descricao": "controla as assinaturas de revistas e jornais, a periodicidade, o valor e o vencimento",
+   "menu": "Periódicos › Assinaturas",
+   "n_casos_qa": 7,
+   "perguntas": [
+    "quais assinaturas de revistas vencem este mês?",
+    "como renovo a assinatura do jornal diário?",
+    "quero assinar uma revista de ciência nova, onde cadastro?",
+    "assinaturas",
+    "onde cancelo a assinatura de uma revista que ninguém lê?",
+    "quanto pagamos por ano de assinatura de periódicos?",
+    "onde mudo a periodicidade de uma revista que passou a ser trimestral?",
+    "como vejo há quanto tempo assinamos uma revista?"
+   ]
+  },
+  {
+   "rota": "Periodicos/RegistroFasciculo",
+   "ficha": {
+    "nome": "Registro de fascículos",
+    "botoes": ["Registrar chegada", "Ver coleção", "Imprimir kardex", "Pesquisar título"],
+    "acoes": ["registrar fascículo", "consultar coleção"],
+    "campos": ["periódico", "volume", "número", "data de chegada", "exemplares recebidos"],
+    "capacidades": ["registra a chegada de cada número das revistas assinadas"]
+   },
+   "descricao": "registra a chegada de cada número das revistas e jornais e mostra a coleção que temos",
+   "menu": "Periódicos › Fascículos",
+   "n_casos_qa": 8,
+   "perguntas": [
+    "chegou a revista do mês, onde registro?",
+    "como vejo quais números de uma revista temos na coleção?",
+    "onde imprimo o kardex de um periódico?",
+    "fascículos",
+    "temos o volume 12 número 3 dessa revista?",
+    "quero dar entrada nos jornais da semana",
+    "onde registro que vieram dois exemplares da mesma edição?",
+    "como sei qual foi o último número que chegou de uma revista?"
+   ]
+  },
+  {
+   "rota": "Periodicos/ReclamacaoFasciculo",
+   "ficha": {
+    "nome": "Reclamação de fascículos",
+    "botoes": ["Nova reclamação", "Enviar à editora", "Registrar resposta", "Ver em atraso"],
+    "acoes": ["reclamar número em falta", "registrar resposta da editora"],
+    "campos": ["periódico", "número em falta", "data prevista", "data da reclamação", "resposta"],
+    "capacidades": ["lista os números de revistas que não chegaram e reclama com a editora"]
+   },
+   "descricao": "lista os números de revistas que deveriam ter chegado e não chegaram e registra a reclamação à editora",
+   "menu": "Periódicos › Reclamações",
+   "n_casos_qa": 4,
+   "perguntas": [
+    "a revista de março não chegou até agora, como reclamo com a editora?",
+    "onde vejo os números de revistas que estão atrasados?",
+    "a editora respondeu que vai reenviar a revista, onde anoto?",
+    "revista não chegou",
+    "quais fascículos estão faltando na coleção por falha de entrega?",
+    "como mando a reclamação do número em falta para a editora?",
+    "já reclamamos desse número antes?",
+    "onde vejo quando a editora prometeu mandar o fascículo que faltou?"
+   ]
+  },
+  {
+   "rota": "Espacos/ReservaSala",
+   "ficha": {
+    "nome": "Reserva de salas de estudo",
+    "botoes": ["Nova reserva", "Cancelar", "Ver agenda", "Registrar presença"],
+    "acoes": ["reservar sala", "cancelar reserva de sala", "registrar uso"],
+    "campos": ["sala", "data", "horário", "responsável", "número de pessoas"],
+    "capacidades": ["agenda o uso das salas de estudo em grupo"]
+   },
+   "descricao": "agenda o uso das salas de estudo em grupo e registra quem usou",
+   "menu": "Espaços › Salas",
+   "n_casos_qa": 9,
+   "perguntas": [
+    "um grupo de alunos quer uma sala para estudar amanhã à tarde, onde reservo?",
+    "quais salas de estudo estão livres agora?",
+    "como cancelo a reserva de sala de um grupo que não vem mais?",
+    "reservar sala",
+    "onde vejo a agenda das salas da semana?",
+    "o grupo não apareceu, onde marco que a sala ficou vazia?",
+    "quantas pessoas cabem na sala 2 e como reservo?",
+    "quero agendar a sala de estudos para quinta das 14h às 16h"
+   ]
+  },
+  {
+   "rota": "Espacos/ReservaComputador",
+   "ficha": {
+    "nome": "Uso de computadores",
+    "botoes": ["Liberar máquina", "Encerrar sessão", "Agendar", "Ver máquinas"],
+    "acoes": ["liberar computador", "encerrar uso", "agendar horário"],
+    "campos": ["computador", "leitor", "início", "fim", "tempo máximo"],
+    "capacidades": ["controla o uso dos computadores de acesso público por leitor e tempo"]
+   },
+   "descricao": "controla o uso dos computadores de acesso público, por leitor e por tempo",
+   "menu": "Espaços › Computadores",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "o leitor quer usar o computador para imprimir um currículo, como libero?",
+    "quais computadores estão ocupados?",
+    "como encerro a sessão de alguém que já passou do tempo no computador?",
+    "computador",
+    "dá para agendar um computador para amanhã cedo?",
+    "onde mudo o tempo máximo de uso dos computadores públicos?",
+    "quem usou o computador 5 hoje de manhã?",
+    "quero liberar uma máquina para um visitante sem cadastro"
+   ]
+  },
+  {
+   "rota": "Espacos/ArmariosGuardaVolumes",
+   "ficha": {
+    "nome": "Armários e guarda-volumes",
+    "botoes": ["Entregar chave", "Receber chave", "Ver armários", "Registrar perda de chave"],
+    "acoes": ["emprestar chave", "receber chave", "registrar chave perdida"],
+    "campos": ["armário", "leitor", "hora de entrega", "hora de devolução", "situação"],
+    "capacidades": ["controla a entrega e a devolução das chaves dos armários"]
+   },
+   "descricao": "controla a entrega e a devolução das chaves dos armários do guarda-volumes",
+   "menu": "Espaços › Guarda-volumes",
+   "n_casos_qa": 4,
+   "perguntas": [
+    "o leitor quer guardar a mochila, como entrego a chave do armário?",
+    "quais armários estão ocupados agora?",
+    "o leitor perdeu a chave do armário, onde registro?",
+    "guarda-volumes",
+    "a biblioteca vai fechar e tem chave que não voltou, onde vejo de quem é?",
+    "como recebo a chave de volta no sistema?",
+    "quero ver quem está com a chave do armário 18",
+    "onde marco que um armário está quebrado?"
+   ]
+  },
+  {
+   "rota": "Eventos/AgendaEventos",
+   "ficha": {
+    "nome": "Agenda de eventos",
+    "botoes": ["Novo evento", "Publicar", "Cancelar evento", "Ver calendário"],
+    "acoes": ["cadastrar evento", "publicar na agenda", "cancelar evento"],
+    "campos": ["título", "tipo", "data", "horário", "local", "vagas", "público-alvo"],
+    "capacidades": ["cadastra e publica eventos como contação de histórias, oficinas e clubes de leitura"]
+   },
+   "descricao": "cadastra e publica os eventos da biblioteca, como contação de histórias, oficinas e clubes de leitura",
+   "menu": "Eventos › Agenda",
+   "n_casos_qa": 8,
+   "perguntas": [
+    "como coloco a contação de histórias de sábado na agenda?",
+    "onde cadastro o clube de leitura que vai acontecer todo mês?",
+    "a oficina de quinta foi cancelada, como aviso no sistema?",
+    "eventos",
+    "quais eventos temos programados para este mês?",
+    "como limito o número de vagas de uma oficina?",
+    "quero publicar o lançamento de um livro de um autor local",
+    "onde mudo o horário de um evento já divulgado?"
+   ]
+  },
+  {
+   "rota": "Eventos/InscricaoEvento",
+   "ficha": {
+    "nome": "Inscrições em eventos",
+    "botoes": ["Inscrever leitor", "Cancelar inscrição", "Lista de presença", "Emitir certificado"],
+    "acoes": ["inscrever", "cancelar inscrição", "registrar presença", "emitir certificado"],
+    "campos": ["evento", "participante", "situação", "presença", "lista de espera"],
+    "capacidades": ["inscreve leitores nos eventos, controla presença e emite certificados"]
+   },
+   "descricao": "inscreve participantes nos eventos, controla a lista de presença e emite certificados",
+   "menu": "Eventos › Inscrições",
+   "n_casos_qa": 7,
+   "perguntas": [
+    "uma mãe quer inscrever o filho na oficina de desenho, onde faço?",
+    "como imprimo a lista de presença do clube de leitura?",
+    "onde emito o certificado de quem participou da palestra?",
+    "inscrição",
+    "quantas pessoas já se inscreveram na oficina de sábado?",
+    "a oficina lotou, dá para colocar em lista de espera?",
+    "como cancelo a inscrição de um participante que desistiu?",
+    "quero marcar quem compareceu ao evento de ontem"
+   ]
+  },
+  {
+   "rota": "Financeiro/MultasAtraso",
+   "ficha": {
+    "nome": "Multas por atraso",
+    "botoes": ["Pesquisar leitor", "Receber pagamento", "Isentar", "Parcelar"],
+    "acoes": ["receber multa", "isentar multa", "parcelar"],
+    "campos": ["leitor", "empréstimo", "dias de atraso", "valor", "situação", "justificativa da isenção"],
+    "capacidades": ["mostra e recebe as multas por atraso de devolução", "isenta multa com justificativa"]
+   },
+   "descricao": "mostra, recebe e isenta as multas geradas por atraso na devolução",
+   "menu": "Financeiro › Multas",
+   "n_casos_qa": 13,
+   "perguntas": [
+    "o leitor quer pagar a multa do livro atrasado, onde recebo?",
+    "como isento a multa de um leitor que estava internado?",
+    "quanto esse leitor deve de multa?",
+    "multa",
+    "dá para parcelar uma multa alta?",
+    "onde vejo as multas que ainda não foram pagas?",
+    "o aluno diz que já pagou a multa, onde confiro?",
+    "como cancelo uma multa lançada por engano?",
+    "quero dar baixa no pagamento da multa de uma leitora"
+   ]
+  },
+  {
+   "rota": "Financeiro/ReposicaoExemplar",
+   "ficha": {
+    "nome": "Reposição de exemplar perdido",
+    "botoes": ["Registrar perda", "Aceitar reposição", "Cobrar valor", "Pesquisar"],
+    "acoes": ["registrar perda pelo leitor", "aceitar livro de reposição", "cobrar valor do exemplar"],
+    "campos": ["leitor", "exemplar perdido", "forma de reposição", "valor cobrado", "situação"],
+    "capacidades": ["trata o livro que o leitor perdeu: reposição por outro exemplar igual ou cobrança do valor"]
+   },
+   "descricao": "trata o exemplar perdido ou estragado pelo leitor: reposição por um igual ou cobrança do valor",
+   "menu": "Financeiro › Reposição",
+   "n_casos_qa": 7,
+   "perguntas": [
+    "o leitor perdeu o livro que pegou emprestado, o que faço no sistema?",
+    "a leitora comprou um livro novo para repor o que o cachorro rasgou, onde registro?",
+    "quanto o leitor tem que pagar por um livro perdido?",
+    "livro perdido",
+    "onde cobro o valor de um exemplar que o aluno não vai devolver?",
+    "o leitor quer trocar o livro perdido por outra edição, dá para aceitar?",
+    "como vejo as reposições que ainda estão pendentes?",
+    "o filho do leitor estragou o livro, como cobro?"
+   ]
+  },
+  {
+   "rota": "Financeiro/CaixaBalcao",
+   "ficha": {
+    "nome": "Caixa do balcão",
+    "botoes": ["Abrir caixa", "Fechar caixa", "Sangria", "Imprimir fechamento"],
+    "acoes": ["abrir caixa", "fechar caixa", "registrar sangria", "conferir valores"],
+    "campos": ["operador", "valor inicial", "recebimentos", "sangrias", "valor final", "diferença"],
+    "capacidades": ["controla a abertura, as entradas e o fechamento do caixa do atendimento"]
+   },
+   "descricao": "controla a abertura, as entradas de dinheiro e o fechamento do caixa do atendimento",
+   "menu": "Financeiro › Caixa",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "como abro o caixa no começo do turno?",
+    "onde faço o fechamento do caixa do dia?",
+    "o caixa fechou com dez reais a menos, onde vejo a diferença?",
+    "caixa",
+    "quero retirar dinheiro do caixa para levar ao cofre, onde registro?",
+    "quanto entrou de dinheiro hoje no balcão?",
+    "como imprimo o relatório de fechamento do caixa?",
+    "o colega esqueceu de fechar o caixa ontem, o que faço?"
+   ]
+  },
+  {
+   "rota": "Financeiro/TabelaValores",
+   "ficha": {
+    "nome": "Tabela de valores",
+    "botoes": ["Novo valor", "Salvar", "Ver vigência", "Histórico de valores"],
+    "acoes": ["definir valor da multa diária", "definir taxas", "agendar vigência"],
+    "campos": ["item", "valor", "categoria do leitor", "início da vigência", "teto da multa"],
+    "capacidades": ["define o valor da multa por dia, o teto e as taxas cobradas"]
+   },
+   "descricao": "define quanto custa cada dia de atraso, o teto da multa e as taxas, como a da segunda via da carteirinha",
+   "menu": "Financeiro › Valores",
+   "n_casos_qa": 5,
+   "perguntas": [
+    "onde mudo o valor da multa por dia de atraso?",
+    "quanto custa a segunda via da carteirinha e onde altero esse valor?",
+    "quero colocar um valor máximo para as multas",
+    "valores",
+    "o novo valor da multa vale a partir de janeiro, como agendo?",
+    "a multa dos professores é diferente da dos alunos, onde configuro?",
+    "onde vejo quanto era a multa no ano passado?",
+    "como mudo o preço da impressão no balcão?"
+   ]
+  },
+  {
+   "rota": "Digital/AcervoDigital",
+   "ficha": {
+    "nome": "Acervo digital",
+    "botoes": ["Adicionar e-book", "Gerenciar licenças", "Ver acessos", "Remover"],
+    "acoes": ["incluir e-book", "controlar licenças simultâneas", "ver acessos"],
+    "campos": ["título", "formato", "licenças", "acessos simultâneos", "validade da licença"],
+    "capacidades": ["cadastra e-books e controla as licenças de leitura simultânea"]
+   },
+   "descricao": "cadastra os livros digitais e controla as licenças de leitura simultânea e a validade",
+   "menu": "Digital › E-books",
+   "n_casos_qa": 8,
+   "perguntas": [
+    "compramos um pacote de e-books, onde cadastro?",
+    "quantas pessoas podem ler esse livro digital ao mesmo tempo?",
+    "a licença de um e-book vai vencer, onde vejo?",
+    "e-book",
+    "quais livros digitais foram mais lidos este mês?",
+    "como tiro do acervo um e-book cuja licença acabou?",
+    "o leitor pode ler um livro online pelo sistema?",
+    "onde aumento o número de licenças de um livro digital?"
+   ]
+  },
+  {
+   "rota": "Digital/RepositorioTrabalhos",
+   "ficha": {
+    "nome": "Repositório de trabalhos acadêmicos",
+    "botoes": ["Novo depósito", "Revisar", "Publicar", "Embargar"],
+    "acoes": ["depositar trabalho", "revisar metadados", "publicar", "aplicar embargo"],
+    "campos": ["autor", "orientador", "título", "curso", "tipo de trabalho", "arquivo", "data de defesa"],
+    "capacidades": ["recebe e publica teses, dissertações e trabalhos de conclusão"]
+   },
+   "descricao": "recebe, revisa e publica teses, dissertações e trabalhos de conclusão de curso",
+   "menu": "Digital › Repositório",
+   "n_casos_qa": 9,
+   "perguntas": [
+    "o aluno defendeu o TCC, onde ele entrega a versão final?",
+    "como publico uma dissertação no repositório?",
+    "o orientador pediu sigilo de dois anos para uma tese, onde coloco?",
+    "repositório",
+    "quero revisar os dados de um trabalho antes de publicar",
+    "onde vejo todos os trabalhos de conclusão do curso de história?",
+    "como corrijo o nome do orientador num trabalho já publicado?",
+    "os alunos podem mandar o arquivo da tese pelo sistema?"
+   ]
+  },
+  {
+   "rota": "Digital/BasesAssinadas",
+   "ficha": {
+    "nome": "Bases de dados assinadas",
+    "botoes": ["Nova base", "Testar link", "Ver estatísticas", "Renovar contrato"],
+    "acoes": ["cadastrar base", "testar acesso", "ver uso"],
+    "campos": ["nome da base", "fornecedor", "link de acesso", "acesso fora do campus", "fim do contrato"],
+    "capacidades": ["lista as bases de dados assinadas, os links de acesso e o uso"]
+   },
+   "descricao": "lista as bases de dados científicas assinadas, os links de acesso dentro e fora do campus e o uso",
+   "menu": "Digital › Bases",
+   "n_casos_qa": 5,
+   "perguntas": [
+    "como o aluno acessa as bases de artigos de casa?",
+    "o link de uma base de dados parou de funcionar, onde testo?",
+    "quais bases de artigos científicos a biblioteca assina?",
+    "bases de dados",
+    "quantos acessos teve a base de engenharia no semestre?",
+    "onde cadastro uma base nova que a universidade contratou?",
+    "quando acaba o contrato da base de periódicos de saúde?",
+    "quero mudar o endereço de acesso de uma base"
+   ]
+  },
+  {
+   "rota": "Relatorios/EstatisticasCirculacao",
+   "ficha": {
+    "nome": "Estatísticas de circulação",
+    "botoes": ["Gerar", "Filtrar período", "Exportar planilha", "Ver gráfico"],
+    "acoes": ["gerar estatística", "exportar"],
+    "campos": ["período", "unidade", "categoria do leitor", "empréstimos", "devoluções", "renovações"],
+    "capacidades": ["conta empréstimos, devoluções e renovações por período, unidade e categoria"]
+   },
+   "descricao": "conta empréstimos, devoluções e renovações por período, unidade e categoria de leitor",
+   "menu": "Relatórios › Circulação",
+   "n_casos_qa": 8,
+   "perguntas": [
+    "quantos empréstimos fizemos no mês passado?",
+    "preciso do número de empréstimos por unidade para o relatório anual",
+    "como comparo os empréstimos deste semestre com o do ano passado?",
+    "estatísticas",
+    "quantas renovações foram feitas em junho?",
+    "quero exportar os números de circulação para uma planilha",
+    "os professores pegam mais livros que os alunos?",
+    "onde vejo o gráfico de empréstimos por mês?"
+   ]
+  },
+  {
+   "rota": "Relatorios/LivrosMaisEmprestados",
+   "ficha": {
+    "nome": "Livros mais emprestados",
+    "botoes": ["Gerar ranking", "Filtrar", "Exportar", "Imprimir"],
+    "acoes": ["gerar ranking", "exportar"],
+    "campos": ["período", "área", "público", "posição", "título", "número de empréstimos"],
+    "capacidades": ["mostra o ranking dos títulos mais emprestados e dos que nunca saíram"]
+   },
+   "descricao": "mostra o ranking dos títulos mais emprestados e a lista dos que nunca saíram da estante",
+   "menu": "Relatórios › Mais emprestados",
+   "n_casos_qa": 5,
+   "perguntas": [
+    "quais foram os livros mais emprestados do ano?",
+    "quero montar a vitrine com os favoritos das crianças, onde vejo os mais lidos?",
+    "quais livros nunca foram emprestados?",
+    "mais lidos",
+    "qual é o livro de literatura mais procurado deste semestre?",
+    "como imprimo o ranking dos dez mais emprestados?",
+    "quais títulos ninguém pega há anos?",
+    "onde vejo os livros mais populares entre os professores?"
+   ]
+  },
+  {
+   "rota": "Relatorios/RelatorioAcervo",
+   "ficha": {
+    "nome": "Relatório do acervo",
+    "botoes": ["Gerar", "Agrupar por área", "Exportar", "Comparar anos"],
+    "acoes": ["contar acervo", "exportar", "comparar"],
+    "campos": ["unidade", "área do conhecimento", "tipo de material", "títulos", "exemplares", "crescimento"],
+    "capacidades": ["conta títulos e exemplares do acervo por área, tipo de material e unidade"]
+   },
+   "descricao": "conta títulos e exemplares do acervo por área, tipo de material e unidade, e o crescimento anual",
+   "menu": "Relatórios › Acervo",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "quantos livros a biblioteca tem ao todo?",
+    "a avaliação do curso pediu o número de títulos por área, onde tiro?",
+    "quanto o acervo cresceu de um ano para o outro?",
+    "tamanho do acervo",
+    "quantos DVDs temos na unidade do bairro?",
+    "quero a quantidade de exemplares de cada área do conhecimento",
+    "como exporto o relatório do acervo para mandar à direção?",
+    "quantos títulos novos entraram no acervo este ano?"
+   ]
+  },
+  {
+   "rota": "Relatorios/FrequenciaVisitantes",
+   "ficha": {
+    "nome": "Frequência de visitantes",
+    "botoes": ["Gerar", "Filtrar período", "Exportar", "Ver por horário"],
+    "acoes": ["contar visitantes", "ver horários de pico"],
+    "campos": ["data", "unidade", "entradas na catraca", "horário de pico", "média diária"],
+    "capacidades": ["conta quantas pessoas entraram na biblioteca por dia e por horário"]
+   },
+   "descricao": "conta quantas pessoas entraram na biblioteca, pela catraca, por dia e por horário",
+   "menu": "Relatórios › Frequência",
+   "n_casos_qa": 4,
+   "perguntas": [
+    "quantas pessoas visitaram a biblioteca na semana passada?",
+    "qual é o horário em que a biblioteca fica mais cheia?",
+    "quero saber a média de visitantes por dia em outubro",
+    "frequência",
+    "a unidade do bairro recebe mais gente que a central?",
+    "onde vejo quantas pessoas passaram pela catraca hoje?",
+    "como exporto o número de visitantes do ano?",
+    "em que dia da semana vem menos gente?"
+   ]
+  },
+  {
+   "rota": "Comunicacao/AvisosLeitores",
+   "ficha": {
+    "nome": "Avisos aos leitores",
+    "botoes": ["Novo modelo", "Ativar aviso", "Enviar teste", "Ver envios"],
+    "acoes": ["editar modelo de mensagem", "ativar aviso automático", "ver histórico de envios"],
+    "campos": ["tipo de aviso", "canal", "antecedência", "texto da mensagem", "situação"],
+    "capacidades": ["configura os avisos automáticos por e-mail e SMS: vencimento, reserva disponível, atraso"]
+   },
+   "descricao": "configura os avisos automáticos por e-mail e SMS, como vencimento próximo, reserva disponível e atraso",
+   "menu": "Comunicação › Avisos",
+   "n_casos_qa": 9,
+   "perguntas": [
+    "quero que o leitor receba um e-mail dois dias antes de vencer o empréstimo, onde configuro?",
+    "como mudo o texto da mensagem que avisa que a reserva chegou?",
+    "o leitor diz que não recebeu o aviso, onde vejo se foi enviado?",
+    "avisos",
+    "dá para mandar SMS em vez de e-mail?",
+    "como desligo o aviso automático de atraso durante as férias?",
+    "onde mando um aviso de teste para mim mesmo?",
+    "quero mudar a assinatura dos e-mails que a biblioteca manda"
+   ]
+  },
+  {
+   "rota": "Comunicacao/Ouvidoria",
+   "ficha": {
+    "nome": "Ouvidoria",
+    "botoes": ["Registrar manifestação", "Responder", "Encaminhar", "Encerrar"],
+    "acoes": ["registrar reclamação", "registrar elogio", "responder", "encaminhar ao setor"],
+    "campos": ["tipo", "leitor", "assunto", "setor responsável", "prazo de resposta", "situação"],
+    "capacidades": ["registra reclamações, elogios e sugestões dos usuários e acompanha a resposta"]
+   },
+   "descricao": "registra reclamações, elogios e sugestões dos usuários e acompanha a resposta de cada setor",
+   "menu": "Comunicação › Ouvidoria",
+   "n_casos_qa": 5,
+   "perguntas": [
+    "um leitor quer reclamar do barulho na sala de leitura, onde registro?",
+    "como respondo uma reclamação que chegou ontem?",
+    "recebemos um elogio para o atendimento, onde lanço?",
+    "reclamação",
+    "quais reclamações estão sem resposta há mais de uma semana?",
+    "como encaminho uma reclamação para o setor de aquisições?",
+    "o leitor deu uma sugestão sobre o horário, onde fica isso?",
+    "onde encerro uma manifestação que já foi resolvida?"
+   ]
+  },
+  {
+   "rota": "Administracao/UsuariosPermissoes",
+   "ficha": {
+    "nome": "Funcionários e permissões",
+    "botoes": ["Novo funcionário", "Definir perfil", "Redefinir senha", "Desativar"],
+    "acoes": ["cadastrar funcionário", "atribuir perfil", "desativar acesso"],
+    "campos": ["nome", "login", "perfil", "unidade", "último acesso", "situação"],
+    "capacidades": ["cadastra os funcionários que usam o sistema e o que cada um pode fazer"]
+   },
+   "descricao": "cadastra os funcionários que usam o sistema e define o perfil de acesso de cada um",
+   "menu": "Administração › Funcionários",
+   "n_casos_qa": 10,
+   "perguntas": [
+    "entrou um estagiário novo, como dou acesso ao sistema para ele?",
+    "como tiro o acesso de um funcionário que saiu?",
+    "a bibliotecária esqueceu a senha do sistema, onde redefino?",
+    "permissões",
+    "quero que o estagiário não possa isentar multas, onde limito?",
+    "onde vejo quem tem perfil de administrador?",
+    "como mudo um funcionário da unidade central para a filial?",
+    "quando foi a última vez que esse funcionário entrou no sistema?"
+   ]
+  },
+  {
+   "rota": "Administracao/Unidades",
+   "ficha": {
+    "nome": "Unidades e horários",
+    "botoes": ["Nova unidade", "Salvar", "Horário de funcionamento", "Inativar"],
+    "acoes": ["cadastrar unidade", "definir horário de funcionamento"],
+    "campos": ["nome da unidade", "endereço", "telefone", "horário semanal", "responsável"],
+    "capacidades": ["mantém as bibliotecas da rede, os endereços e o horário de funcionamento de cada uma"]
+   },
+   "descricao": "mantém as unidades da rede de bibliotecas, os endereços e o horário de funcionamento semanal",
+   "menu": "Administração › Unidades",
+   "n_casos_qa": 5,
+   "perguntas": [
+    "vamos abrir uma biblioteca nova no bairro norte, onde cadastro?",
+    "a unidade central vai passar a abrir aos sábados, onde mudo o horário?",
+    "onde atualizo o telefone de uma das bibliotecas da rede?",
+    "unidades",
+    "quais bibliotecas fazem parte da rede?",
+    "quem é o responsável pela unidade do centro?",
+    "como desativo uma unidade que fechou?",
+    "onde fica o horário de funcionamento que aparece para os leitores?"
+   ]
+  },
+  {
+   "rota": "Administracao/ParametrosSistema",
+   "ficha": {
+    "nome": "Parâmetros do sistema",
+    "botoes": ["Salvar", "Restaurar padrão", "Ver alterações"],
+    "acoes": ["alterar parâmetro", "restaurar padrão"],
+    "campos": ["nome da instituição", "logotipo", "fuso horário", "idioma", "formato do código de barras", "servidor de e-mail"],
+    "capacidades": ["guarda as configurações gerais da instituição e do sistema"]
+   },
+   "descricao": "guarda as configurações gerais: nome e logotipo da instituição, fuso, idioma, formato do código de barras e e-mail",
+   "menu": "Administração › Parâmetros",
+   "n_casos_qa": 6,
+   "perguntas": [
+    "onde troco o logotipo que sai nos comprovantes?",
+    "como configuro o servidor de e-mail que o sistema usa para mandar mensagens?",
+    "quero mudar o nome da instituição que aparece no topo",
+    "configurações",
+    "o horário do sistema está errado, onde ajusto o fuso?",
+    "onde defino o formato dos códigos de barras dos exemplares?",
+    "como volto as configurações para o padrão?",
+    "dá para mudar o idioma do sistema?"
+   ]
+  },
+  {
+   "rota": "Administracao/AuditoriaAcoes",
+   "ficha": {
+    "nome": "Auditoria de ações",
+    "botoes": ["Pesquisar", "Filtrar por funcionário", "Exportar", "Ver detalhes"],
+    "acoes": ["consultar registro de ações", "exportar"],
+    "campos": ["data e hora", "funcionário", "tela", "ação", "registro afetado", "valor anterior"],
+    "capacidades": ["mostra quem fez o quê no sistema e quando"]
+   },
+   "descricao": "mostra o registro de quem fez o quê no sistema, quando e o que havia antes da mudança",
+   "menu": "Administração › Auditoria",
+   "n_casos_qa": 4,
+   "perguntas": [
+    "alguém apagou o cadastro de um leitor, como descubro quem foi?",
+    "quero ver tudo o que um funcionário fez ontem no sistema",
+    "quem mudou o valor da multa?",
+    "auditoria",
+    "onde vejo o valor que estava antes de alguém alterar um registro?",
+    "como exporto o registro de ações do mês para a controladoria?",
+    "quem isentou as multas na semana passada?",
+    "dá para saber quem catalogou esse livro?"
+   ]
+  }
+ ]
+}
